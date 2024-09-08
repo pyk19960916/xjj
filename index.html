@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Player</title>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        video {
+            max-width: 100%;
+            margin: 20px auto;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+  <video id="videoPlayer" width="640" height="360" controls autoplay>
+      <source src="" type="video/mp4">
+        您的浏览器不支持HTML5视频。
+    </video>
+
+    <div>
+      <button onclick="changeVideo(0)">随机妹子1</button>
+      <button onclick="changeVideo(1)">随机妹子2</button>
+      <button onclick="changeVideo(2)">女大学生</button>
+      <button onclick="changeVideo(3)">黑丝系列</button>
+      <button onclick="changeVideo(4)">慢摇系列</button>
+      <button onclick="changeVideo(5)">吊带系列</button>
+      <button onclick="changeVideo(6)">清纯系列</button>
+      <button onclick="changeVideo(7)">女高系列</button>
+      <button onclick="changeVideo(8)">甜妹系列</button>
+    </div>
+  <button onclick="refreshVideo()" style="margin-top: 10px;">下一个视频</button>
+
+  <script>
+        const apiUrls = [
+            'http://api.yujn.cn/api/zzxjj.php?type=video',
+            'https://api.linhun.vip/api/Littlesistervideo?type=video&apiKey=48b0b2ef0f8483326c3c5424911d5924',
+            'https://api.yujn.cn/api/nvda.php?type=video',
+            'http://api.yujn.cn/api/heisis.php?type=video',
+            'http://api.yujn.cn/api/manyao.php?type=video',
+            'http://api.yujn.cn/api/diaodai.php?type=video',
+            'http://api.yujn.cn/api/qingchun.php?type=video',
+            'http://api.yujn.cn/api/nvgao.php?type=video',
+            'http://api.yujn.cn/api/tianmei.php?type=video'
+        ];
+
+        let currentVideoIndex = 0;
+        let currentApiIndex = 0;
+
+        function changeVideo(index) {
+            currentApiIndex = index;
+            currentVideoIndex = 0;
+            loadVideo();
+        }
+
+        function refreshVideo() {
+            currentVideoIndex++;
+            loadVideo();
+        }
+
+        function loadVideo() {
+            const apiUrl = apiUrls[currentApiIndex] + '&index=' + currentVideoIndex;
+            document.getElementById('videoPlayer').src = apiUrl;
+        }
+    </script>
+</body>
+</html>
